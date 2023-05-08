@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-counter',
@@ -12,7 +12,7 @@ export class CounterComponent implements OnInit {
 
   @ViewChild("p") paragraph!: ElementRef<HTMLParagraphElement>;
 
-  constructor(private cdr: ChangeDetectorRef, private readonly renderer: Renderer2) { }
+  constructor(private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
   }
@@ -25,12 +25,7 @@ export class CounterComponent implements OnInit {
       this.value--;
     }
 
-    this.renderer.setProperty(this.paragraph.nativeElement, 'innerHTML', this.value);
-    (this.value >= 0) ? this.renderer.setStyle(this.paragraph.nativeElement, 'background-color', 'green') 
-                     : this.renderer.setStyle(this.paragraph.nativeElement, 'background-color', 'red')
-
-    //this.cdr.detectChanges();
-    //this.cdr.markForCheck();
+    this.cdr.detectChanges();
   }
 
   change() {
