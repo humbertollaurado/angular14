@@ -1,16 +1,13 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-counter',
   templateUrl: './counter.component.html',
   styleUrls: ['./counter.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CounterComponent implements OnInit {
 
   value = 0;
-
-  @ViewChild("p") paragraph!: ElementRef<HTMLParagraphElement>;
 
   constructor(private cdr: ChangeDetectorRef) { }
 
@@ -24,8 +21,6 @@ export class CounterComponent implements OnInit {
     if (!isAdd) {
       this.value--;
     }
-
-    this.cdr.detectChanges();
   }
 
   change() {
