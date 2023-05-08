@@ -18,16 +18,17 @@ export class CounterComponent implements OnInit {
   }
 
   onClick(isAdd: boolean): void {
-    //console.log(isAdd)
-    if(isAdd) {
+    if (isAdd) {
       this.value++;
-      this.renderer.setProperty(this.paragraph.nativeElement, 'innerHTML', this.value); 
-      //this.cdr.detectChanges();
-      //this.cdr.markForCheck();
-      return;
     }
-    this.value --; 
-    this.renderer.setProperty(this.paragraph.nativeElement, 'innerHTML', this.value);  
+    if (!isAdd) {
+      this.value--;
+    }
+
+    this.renderer.setProperty(this.paragraph.nativeElement, 'innerHTML', this.value);
+    (this.value >= 0) ? this.renderer.setStyle(this.paragraph.nativeElement, 'background-color', 'green') 
+                     : this.renderer.setStyle(this.paragraph.nativeElement, 'background-color', 'red')
+
     //this.cdr.detectChanges();
     //this.cdr.markForCheck();
   }
