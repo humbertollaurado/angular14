@@ -1,18 +1,21 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  //changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent {
   
 
-  constructor() {}
+  constructor(public ngZone: NgZone) {}
 
   click() {
-    console.log('click')
+    this.ngZone.runOutsideAngular(()=> {
+      console.log('click')
+    })
+    
   }
 
   change() {

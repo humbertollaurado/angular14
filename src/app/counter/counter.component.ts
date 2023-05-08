@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-counter',
@@ -12,20 +12,32 @@ export class CounterComponent implements OnInit {
 
   @ViewChild("p") paragraph!: ElementRef<HTMLParagraphElement>;
 
-  constructor(private cdr: ChangeDetectorRef) { }
+  constructor(private cdr: ChangeDetectorRef, public ngZone: NgZone) { }
 
   ngOnInit(): void {
   }
 
   onClick(isAdd: boolean): void {
-    if (isAdd) {
-      this.value++;
-    }
-    if (!isAdd) {
-      this.value--;
-    }
 
-    this.cdr.detectChanges();
+    (isAdd) ? this.value++ : this.value--;
+    /*const interval$ = interval(1000);
+    interval$.subscribe(()=> {
+      this.value++;
+      this.cdr.markForCheck();
+    })
+    
+ 
+    this.ngZone.runOutsideAngular(()=> {
+      interval$.subscribe(()=> {
+        this.value++;
+          console.log('bb')
+          if(this.value % 2 == 0) {
+            //this.cdr.markForCheck();
+            this.cdr.detectChanges();
+          }
+      })
+    })*/
+
   }
 
   change() {
