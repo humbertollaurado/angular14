@@ -1,8 +1,11 @@
 
-<div style="background-color: brown;">
-  <h1 *ngIf="change()">Este es el app component</h1>
+<div class="container">
+  <h1 *ngIf="change()" style="text-align: center;">Este es el app component</h1>
 
-  <app-counter></app-counter>
-  <app-counter></app-counter>
-  <app-counter></app-counter>
+  <div class="container-counter">
+    <app-counter></app-counter>
+    <app-counter></app-counter>
+    <app-counter></app-counter>
+  </div>
+  
 </div>
